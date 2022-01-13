@@ -28,7 +28,7 @@ const DatabaseConfig = {
     dropSchema: false,
     autoLoadEntities: true,
     schema: "public",
-    synchronize: false, /// process.env.NODE_ENV !== 'production',
+    synchronize: true, /// process.env.NODE_ENV !== 'production',
     entities: [
         join(__dirname,'..', 'entities/*.entity.{ts,js}'),
     ],

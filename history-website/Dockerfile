@@ -27,6 +27,7 @@ RUN npm cache clean --force
 # install all dependencies
 USER 1000
 RUN npm install 
+RUN npm run migration:run
 
 EXPOSE 5000
 
