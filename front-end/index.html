@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>History | Trang chủ</title>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap-footer.css" rel="stylesheet">
+    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap/css/sidebars.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        .active_hori {
+            background-color: #0d6efd;
+            color: white;
+        }
+        
+        .list-group-item.active_hori {
+            color: #fff;
+            background-color: #0d6efd;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+            <a href="/index2.html" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+                <img src="images/Logo_THPT_KRB.png" style="width: 150px">
+            </a>
+            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="#" class="nav-link px-2 link-dark" id="chronology">Tìm hiểu niên đại</a></li>
+                <li><a href="#" class="nav-link px-2 link-dark" id="compare_chronology">So sánh niên đại</a></li>
+                <li><a href="#" class="nav-link px-2 link-dark">Thông tin</a></li>
+            </ul>
+            <div class="col-md-3 text-end">
+                <button type="button" class="btn btn-outline-primary me-2">Đăng nhập</button>
+                <button type="button" class="btn btn-primary">Đăng kí</button>
+            </div>
+        </header>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-2">
+                <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white" style="height: 500px;">
+                    <div id="list_div" class="list-group list-group-flush border-bottom scrollarea">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-10">
+                <nav class="bg-light" style="height: 450px;">
+                    <div class="tab-content">
+                          <br/>
+                          <div id="menu1" class="container">
+                          </div>
+                    </div>
+                </nav>
+                <nav style="height: 20px;"></nav>
+                <main>
+                    <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white" style="width: fit-content;">
+                        <div id="list_divhori" class="list-group list-group-horizontal border-bottom scrollarea">
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+    <script>
+        var selectdating = 0;
+        var selecttab = 0;
+        window.onload = (event) => {
+            getContent(0,0);
+        };
+
+        function getContent(selecttabp,selectdatingp){
+            $.ajax({
+                    url : `http://localhost:5000/historyblob/datinglistindex?tabindex=${selecttabp}&datingindex=${selectdatingp}`,
+                    type : "get",
+                    success : function (result){
+                        $('#menu1').empty();
+                        if(result.selectBlob==undefined){
+                            $('#menu1').append(`Nội dung chưa được tạo`);
+                            return;
+                        }
+                        $("#list_div").empty();
+                        result.dating.forEach(element => {
+                            $("#list_div").append(`
+                                <a id="${element.id}_span" onclick="RemoveHover(${element.id},true)" class="list-group-item list-group-item-action py-3 lh-tight text-center" style="border-radius: 15px; border-width:5px; margin-bottom: 10px;">
+                                        <h6 id="${element.id}_name">${element.dating_Name}</h6>
+                                        <small id="${element.id}_year">${element.dating_Year}</small>
+                                </a>              
+                            `)
+                        });
+                        $("#list_divhori").empty();
+                        result.tab.forEach(element => {
+                            $("#list_divhori").append(`
+                            <a id="${element.id}_tab" onclick="RemoveHoverTab(${element.id},true)" class="list-group-item" style="border-radius: 10px;margin-right: 10px; border-width:5px;">
+                                <strong class="mb-1">${element.tabname}</strong>
+                            </a>
+                        `)
+                        });
+                        selecttab = result.selectBlob.tabId;
+                        selectdating = result.selectBlob.datingId;
+                        RemoveHover(result.selectBlob.datingId,false);
+                        RemoveHoverTab(result.selectBlob.tabId,false);
+                        $('#menu1').append(result.selectBlob.content);
+                    }
+                });
+
+        }
+
+
+        function RemoveHover(id,load){
+            selectdating = id;
+            if(load) {getContent(selecttab,selectdating)};
+            $('#list_div').children().each(function(idx, val){
+                if(parseInt(val.id.split('_')[0])!=parseInt(id)){
+                    $(`#${val.id}`).removeClass('active_hori');
+                }
+                else{
+                    $(`#${val.id}`).addClass('active_hori');    
+                }
+            })
+        }
+        function RemoveHoverTab(id,load){
+            selecttab = id;
+            if(load) {getContent(selecttab,selectdating)};
+            $('#list_divhori').children().each(function(idx, val){
+                if(parseInt(val.id.split('_')[0])!=parseInt(id)){
+                    $(`#${val.id}`).removeClass('active_hori');
+                }
+                else{
+                    $(`#${val.id}`).addClass('active_hori');    
+                }
+            })
+        }
+
+
+
+    </script>
+
+</body>
+
+</html>
