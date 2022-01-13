@@ -27,25 +27,5 @@ services:
          - 5000:5000
        restart: unless-stopped
 
-    migration:
-      build:
-        context: .
-      command:
-        [
-          "./wait-for-it/wait-for-it.sh",
-          "db:5432",
-          "--",
-          "npm",
-          "run",
-          "migrate"
-        ]
-      links:
-        - db
-      depends_on:
-        - db
-      env_file: ./.env
-      environment:
-        - DB_HOST=database_application
-    
 volumes: 
   db-data:
