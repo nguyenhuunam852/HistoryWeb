@@ -2,7 +2,6 @@ version: '3.8'
 
 services:
     db:
-       container_name: database_application
        image: mysql:8.0
        ports:
         - '3306:3306'
@@ -21,8 +20,6 @@ services:
            context: .
            target: backend
            dockerfile: Dockerfile
-       environment:
-        - DB_HOST=database_application
        volumes:
          - .:/usr/src/app
          - /usr/src/app/node_modules   
