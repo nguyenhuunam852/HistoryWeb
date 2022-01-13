@@ -71,6 +71,7 @@
         </div>
     </div>
     <script>
+        var host = 'http://ec2-54-183-30-28.us-west-1.compute.amazonaws.com';
         var selectdating = 0;
         var selecttab = 0;
         window.onload = (event) => {
@@ -79,7 +80,7 @@
 
         function getContent(selecttabp,selectdatingp){
             $.ajax({
-                    url : `http://54.183.61.82/historyblob/datinglistindex?tabindex=${selecttabp}&datingindex=${selectdatingp}`,
+                    url : `${host}/historyblob/datinglistindex?tabindex=${selecttabp}&datingindex=${selectdatingp}`,
                     type : "get",
                     success : function (result){
                         $('#menu1').empty();
