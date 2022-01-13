@@ -19,6 +19,8 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
+    "build:dev": "nest build && pm2 start --no-daemon pm2.yaml --no-autorestart",
+    "build:prod": "nest build && NODE_PORT=5000 pm2 start pm2.yaml -n nest-demo --env production",
     "migration:create": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:generate --config=./src/config/database.ts -n",
     "migration:run": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run --config=./src/config/database.ts",
     "migration:revert": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:revert --config=./src/config/database.ts",
