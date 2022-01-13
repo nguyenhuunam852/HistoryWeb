@@ -59,7 +59,8 @@ export class HistoryblobController {
 
   @Get('seed')
   async seed(){
-    if(process.env.AllowSeed){
+    console.log('test')
+    if(process.env.AllowSeed == 'true'){
       var tabname = "Kinh đô";
       await this.historyblobService.createTabbyName(tabname);
       var tabname1 = "Bộ máy nhà nước";
@@ -71,13 +72,14 @@ export class HistoryblobController {
       var tabname4 = "Tôn giáo";
       await this.historyblobService.createTabbyName(tabname4);
       var tabname5 = "Chính trị";
-      await this.historyblobService.createTabbyName(tabname5)
+      await this.historyblobService.createTabbyName(tabname5);
       var tabname6 = "Quân đội";
-      await this.historyblobService.createTabbyName(tabname6)
+      await this.historyblobService.createTabbyName(tabname6);
       var tabname7 = "Pháp luật";
-      await this.historyblobService.createTabbyName(tabname7)
-
+      await this.historyblobService.createTabbyName(tabname7);
+      return 'Done';
     }
+    return 'Fail';
   }
 
 
