@@ -20,6 +20,13 @@ export class BlobEntity {
   @DeleteDateColumn({ name: 'deleted_at' })
   public deletedAt: Date
 
+  @Column({ name: 'tabId' })
+  tabId: number;
+
+  @Column({ name: 'datingId' })
+  datingId: number;
+
+
   @ManyToOne(type => TabEntity, tab => tab.id)
   tab: TabEntity;
 

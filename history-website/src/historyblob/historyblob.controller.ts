@@ -1,34 +1,64 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { HistoryblobService } from './historyblob.service';
-import { CreateHistoryblobDto } from './dto/create-historyblob.dto';
-import { UpdateHistoryblobDto } from './dto/update-historyblob.dto';
+import { DatingBlobDto } from './dto/dating-blob.dto';
+import { BlobDto } from './dto/blob.dto';
+import { TabBlobDto } from './dto/tab-blob.dto';
 
 @Controller('historyblob')
 export class HistoryblobController {
   constructor(private readonly historyblobService: HistoryblobService) {}
 
-  @Post()
-  create(@Body() createHistoryblobDto: CreateHistoryblobDto) {
-    return this.historyblobService.create(createHistoryblobDto);
+  @Post('datingcreate')
+  async createDating(@Body() dating: DatingBlobDto) {
+    console.log(dating);
+    var result = await this.historyblobService.createDating(dating);
+    console.log(result)
+    if(result){
+      return this.historyblobService.getlistDating();
+    }
+    else{
+      return {
+        "Fail":"Fail"
+      }
+    }
   }
 
-  @Get()
-  findAll() {
-    return this.historyblobService.findAll();
+  @Post('tabcreate')
+  createTab(@Body() tab: TabBlobDto) {
+    return this.historyblobService.createTab(tab);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.historyblobService.findOne(+id);
+  @Post('blobcreate')
+  async createBlob(@Body() blob: BlobDto) {
+    console.log(blob)
+    var result = await this.historyblobService.createBlob(blob)
+    return result;
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateHistoryblobDto: UpdateHistoryblobDto) {
-    return this.historyblobService.update(+id, updateHistoryblobDto);
+  @Get('datinglist')
+  async listDating() {
+    var result = {
+      "dating": await this.historyblobService.getlistDating(),
+      "tab": await this.historyblobService.getlistTab()
+    }
+    return result;
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.historyblobService.remove(+id);
+  @Get('datinglistindex')
+  async listDatingIndex(@Query() query) {
+    console.log(query)
+    var get = await this.historyblobService.getBlobbyIndex(query.tabindex,query.datingindex);
+    console.log(get)
+    var result = {
+      "dating": await this.historyblobService.getlistDating(),
+      "tab": await this.historyblobService.getlistTab(),
+      "selectBlob": await this.historyblobService.getBlobbyIndex(query.tabindex,query.datingindex)
+    }
+    return result;
   }
+
+
+
+
+
 }

@@ -7,13 +7,7 @@ export class TabEntity {
   id: number;
 
   @Column()
-  firstName: string;
-
-  @Column()
-  lastName: string;
-
-  @Column({ default: true })
-  isActive: boolean;
+  tabname: string;
 
   @CreateDateColumn({ name: 'created_at' })
   public createdAt: Date

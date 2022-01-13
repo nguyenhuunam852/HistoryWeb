@@ -20,6 +20,7 @@ export class DatingEntity {
 
   @DeleteDateColumn({ name: 'deleted_at' })
   public deletedAt: Date
+  
 
   @OneToMany(() => BlobEntity,(blob)=>blob.id ,{
     onDelete: 'CASCADE',
