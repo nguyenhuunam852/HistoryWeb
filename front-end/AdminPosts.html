@@ -88,9 +88,10 @@
     </div>
     <!-- /<script src="ITCun/javascript/morePosts.js"></script> -->
     <script>
+        var host = "http://54.183.61.82:80"
         window.onload = (event) => {
             $.ajax({
-                    url : "http://localhost:5000/historyblob/datinglist",
+                    url : `${host}/historyblob/datinglist`,
                     type : "get",
                     success : function (result){
                         console.log(result)
@@ -141,7 +142,7 @@
             var htmlstring = CKEDITOR.instances['editor'].getData();
             console.log(String(htmlstring));
             $.ajax({
-                    url : "http://localhost:5000/historyblob/blobcreate",
+                    url : `${host}/historyblob/blobcreate`,
                     type : "post",
                     contentType: "application/json",
                     data:JSON.stringify({
@@ -182,7 +183,7 @@
             var year = $("#inYearND").val();
             console.log(year)
             $.ajax({
-                    url : "http://localhost:5000/historyblob/datingcreate",
+                    url : `${host}/historyblob/datingcreate`,
                     type : "post",
                     contentType: "application/json",
                     data:JSON.stringify({

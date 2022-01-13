@@ -43,6 +43,13 @@ export class HistoryblobService {
     return await this.tabRepository.find();
   }
 
+  async createTabbyName(name:string){
+    var tab = new TabEntity();
+    tab.tabname = name;
+    return await this.tabRepository.save(tab);
+  }
+
+
   async getBlobbyIndex(tabindex:number,datingindex:number){
     if(tabindex==0 || datingindex ==0){
       return (await this.blobRepository.find())[0]

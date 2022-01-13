@@ -57,6 +57,28 @@ export class HistoryblobController {
     return result;
   }
 
+  @Get('seed')
+  async seed(){
+    if(process.env.AllowSeed){
+      var tabname = "Kinh đô";
+      await this.historyblobService.createTabbyName(tabname);
+      var tabname1 = "Bộ máy nhà nước";
+      await this.historyblobService.createTabbyName(tabname1);
+      var tabname2 = "Kinh tế";
+      await this.historyblobService.createTabbyName(tabname2);
+      var tabname3 = "Giáo dục";
+      await this.historyblobService.createTabbyName(tabname3);
+      var tabname4 = "Tôn giáo";
+      await this.historyblobService.createTabbyName(tabname4);
+      var tabname5 = "Chính trị";
+      await this.historyblobService.createTabbyName(tabname5)
+      var tabname6 = "Quân đội";
+      await this.historyblobService.createTabbyName(tabname6)
+      var tabname7 = "Pháp luật";
+      await this.historyblobService.createTabbyName(tabname7)
+
+    }
+  }
 
 
 

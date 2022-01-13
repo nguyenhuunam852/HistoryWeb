@@ -79,7 +79,7 @@
 
         function getContent(selecttabp,selectdatingp){
             $.ajax({
-                    url : `http://localhost:5000/historyblob/datinglistindex?tabindex=${selecttabp}&datingindex=${selectdatingp}`,
+                    url : `http://54.183.61.82/historyblob/datinglistindex?tabindex=${selecttabp}&datingindex=${selectdatingp}`,
                     type : "get",
                     success : function (result){
                         $('#menu1').empty();
