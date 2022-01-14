@@ -12,6 +12,9 @@ services:
        volumes: 
          - db-data:/var/lib/mysql
          - ./db/backup/files/:/data_backup/data
+       networks:
+        - app-network
+
 
     backend_history:
        container_name: nestjs_history
@@ -26,6 +29,27 @@ services:
        ports:
          - 5000:5000
        restart: unless-stopped
+       networks:
+        - app-network
+
+
+    nginx:
+      build:
+        context: ./.docker/services/
+        dockerfile: ./nginx/build/Dockerfile
+      ports:
+        - "443:443"
+        - "80:80"
+      volumes:
+        - ./.docker/services/nginx/conf:/etc/nginx/conf.d
+        - .:/var/www/app
+      working_dir: /var/www/app
+      networks:
+        - app-network
+
+networks:
+  app-network:
+    driver: bridge
 
 volumes: 
   db-data:
