@@ -10,7 +10,7 @@ export class DatingEntity {
   dating_Name: string;
 
   @Column()
-  dating_Year: number;
+  dating_Year: string;
 
   @CreateDateColumn({ name: 'created_at' })
   public createdAt: Date
