@@ -8,7 +8,7 @@ export class BlobEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column("text")
+  @Column("longtext")
   content: string;
 
   @CreateDateColumn({ name: 'created_at' })
