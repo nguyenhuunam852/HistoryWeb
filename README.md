@@ -34,15 +34,7 @@ git clone https://github.com/nguyenhuunam852/HistoryWeb.git
 cd HistoryWeb/history-website
 ```
 
-### 2. Serve the frontend
-
-You can open `index.html` directly in a browser, or serve it via any static server like:
-
-```bash
-npx serve .
-```
-
-### 3. Run the backend (NestJS)
+### 2. Run the backend (NestJS)
 
 Go to the backend folder (adjust if path is different):
 
@@ -51,17 +43,6 @@ cd ../backend  # or wherever your NestJS backend is
 npm install
 npm run start
 ```
-
----
-
-## 📁 Project Structure
-
-```
-HistoryWeb/
-├── history-website/     # Frontend (HTML/CSS/JS)
-└── backend/             # NestJS server (API for historical content)
-```
-
 ---
 
 ## 📄 License
