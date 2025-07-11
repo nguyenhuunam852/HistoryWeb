@@ -8,7 +8,7 @@ Frontend is a clean and responsive HTML/CSS/JS layout. Backend is powered by [Ne
 ## 🚀 Features
 
 - View historical content served from backend APIs
-- Responsive and fast-loading UI
+- Fast-loading UI
 - Easy to deploy and extend
 - Clean folder structure and modular backend
 
